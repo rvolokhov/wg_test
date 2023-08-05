@@ -6,6 +6,15 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
 import re
+from dataclasses import dataclass
+
+@dataclass
+class WikiData:
+    websites_list: list
+    popularities_list: list
+    frontend_list: list
+    backend_list: list
+
 
 # setup chrome
 chr_options = Options()
@@ -48,9 +57,10 @@ for item in column_popularity:
 driver.close()
 
 # create list of tuples consisting of info we've got
-wikidata = []
-for x in range(len(popularities)):
-    wikidata.append((websites[x], popularities[x], frontends[x], backends[x]))
+wikidata = WikiData(websites_list=websites, popularities_list=popularities, frontend_list=frontends, backend_list=backends)
+# wikidata = []
+# for x in range(len(popularities)):
+#    wikidata.append((websites[x], popularities[x], frontends[x], backends[x]))
 
 # testdata we need to compare with
 testdatavalues = [10 ** 7, int(1.5 * 10 ** 7), 5 * 10 ** 7, 10 ** 8, 5 * 10 ** 8, 10 ** 9, int(1.5 * 10 ** 9)]
@@ -58,7 +68,7 @@ testdatavalues = [10 ** 7, int(1.5 * 10 ** 7), 5 * 10 ** 7, 10 ** 8, 5 * 10 ** 8
 
 @pytest.mark.parametrize("testdatavalue", testdatavalues)
 def test_multiplication(testdatavalue):
-    for wikivalue in wikidata:
-        check.less(wikivalue[1], testdatavalue,
-                   "\n" + wikivalue[0] + "(Frontend:" + wikivalue[2] + " \ Backend:" + wikivalue[3] + ") has " +
-                   str(wikivalue[1]) + " unique visitors per month. (expected more then " + str(testdatavalue) + ")")
+    for i in range(0, len(wikidata.websites_list)):
+        check.less(wikidata.popularities_list[i], testdatavalue,
+                   "\n" + wikidata.websites_list[i] + "(Frontend:" + wikidata.frontend_list[i] + " \ Backend:" + wikidata.backend_list[i] + ") has " +
+                   str(wikidata.popularities_list[i]) + " unique visitors per month. (expected more then " + str(testdatavalue) + ")")
