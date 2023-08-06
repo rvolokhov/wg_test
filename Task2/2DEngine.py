@@ -16,9 +16,13 @@ figures = []
 colors = ["red", "green", "blue"]
 
 
+def change_color(color: str):
+    Shape.change_color(color)
+
+
 # callback func for clicking
-def mouse_click():
-    Shape.change_color(colors[random.randint(0, 2)])
+def mouse_click(event):
+    change_color(colors[random.randint(0, 2)])
     draw(canvas)
 
 
