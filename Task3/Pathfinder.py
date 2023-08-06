@@ -27,26 +27,36 @@ min_path = []
 # mouse left button callback func
 def click_mlb(event):
     global player_cell, target_cell, min_path, foundNode
-    player_cell = Node(event.x // 50, event.y // 50)
-    foundNode = None
-    generate_maze_steps()
-    draw()
-    min_path = []
-    if target_cell:
-        find_path()
-    init()
+    player_x = event.x // 50
+    player_y = event.y // 50
+    if maze[player_y][player_x] == 1:
+        showinfo(title="Warning", message="You should click on water.")
+    else:
+        player_cell = Node(player_x, player_y)
+        foundNode = None
+        generate_maze_steps()
+        draw()
+        min_path = []
+        if target_cell:
+            find_path()
+        init()
 
 
 # mouse right button callback func
 def click_mrb(event):
     global player_cell, target_cell, min_path, foundNode
-    target_cell = Node(event.x // 50, event.y // 50)
-    foundNode = None
-    draw()
-    min_path = []
-    if player_cell:
-        find_path()
-    init()
+    target_x = event.x // 50
+    target_y = event.y // 50
+    target_cell = Node(target_x, target_y)
+    if maze[target_y][target_x] == 1:
+        showinfo(title="Warning", message="You should click on water.")
+    else:
+        foundNode = None
+        draw()
+        min_path = []
+        if player_cell:
+            find_path()
+        init()
 
 
 def generate_map():
@@ -107,7 +117,7 @@ def find_path():
     if foundNode:
         backtrack(foundNode)
     else:
-        showinfo(title="Warning", message="Path not found")
+        showinfo(title="Warning", message="Can't reach. Path not found.")
     draw()
 
 
