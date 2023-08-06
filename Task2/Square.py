@@ -12,9 +12,9 @@ class Square(Shape):
     def draw(self, c: Canvas):
         c.create_rectangle(self.position_x, self.position_y, self.position_x+self.sideA, self.position_y+self.sideB, outline=self.color, width=2)
 
-    def draw_text(self, c:Canvas) -> str:
+    def draw_text(self, c: Canvas) -> str:
         text = "Drawing a square ("+str(self.position_x)+", "+str(self.position_y)+") with sides are "+str(self.sideA)+" and "+str(self.sideB)
-        if Shape.color != 'black':
+        if Shape.color != "black":
             text = text + "\nSelected color is "+Shape.color
         c.create_text(self.position_x, self.position_y, text=text, fill="black", font="Helvetica 8 normal", anchor=SW)
         return text

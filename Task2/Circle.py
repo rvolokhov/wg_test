@@ -13,7 +13,7 @@ class Circle(Shape):
 
     def draw_text(self, c:Canvas) -> str:
         text = "Drawing a circle: ("+str(self.position_x)+", "+str(self.position_y)+") with radius "+str(self.radius)
-        if Shape.color != 'black':
+        if Shape.color != "black":
             text = text + "\nSelected color is " + Shape.color
         c.create_text(self.position_x+self.radius, self.position_y+self.radius, text=text, fill="black", font="Helvetica 8 normal", anchor=SW)
         return text

@@ -1,2 +1,4 @@
-/.idea
-/.pytest_cache
+.idea
+.idea/
+.pytest_cache
+.pytest_cache/

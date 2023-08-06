@@ -3,7 +3,7 @@ from tkinter import *
 
 # parent class for figures
 class Shape(ABC):
-    color = 'black'
+    color = "black"
 
     @abstractmethod
     def draw(self, c: Canvas):

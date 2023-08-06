@@ -1,5 +1,4 @@
 from Shape import Shape
-from Square import Square
 from Circle import Circle
 from tkinter import Canvas
 

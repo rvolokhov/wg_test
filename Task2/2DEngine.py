@@ -13,15 +13,19 @@ canvas = Canvas(width=400, height=400, bg="white")
 # list of figures (shapes)
 figures = []
 # list of colors, they will be selected randomly by clicking on canvas
-colors = ['red', 'green', 'blue']
+colors = ["red", "green", "blue"]
 
-#callback func for clicking
-def callback(event):
-    Shape.change_color(colors[random.randint(0,2)])
+
+# callback func for clicking
+def mouse_click():
+    Shape.change_color(colors[random.randint(0, 2)])
     draw(canvas)
 
+
 def init():
-    canvas.bind("<Button-1>", callback)
+    mouse_left_button = "<Button-1>"
+    # bind left mouse button click
+    canvas.bind(mouse_left_button, mouse_click)
     canvas.pack()
     # creating figures and add them to the list
     figures.append(Square(50, 220, 50, 75))
@@ -39,5 +43,7 @@ def draw(c):
         figure.draw(c)
         figure.draw_text(c)
 
+
 # entry point
-init()
+if __name__ == "__main__":
+    init()
